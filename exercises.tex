@@ -1,0 +1,869 @@
+% John Peloquin
+% Exercises from Mathematical Logic
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb,amsthm,enumitem,fourier}
+
+\newcommand{\N}{\mathbf{N}}
+\newcommand{\Ns}{\mathfrak{N}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Zs}{\mathfrak{Z}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\ps}{\mathcal{P}}
+\newcommand{\sfs}{\mathrm{SF}}
+
+\newcommand{\lequ}{\equiv}
+\newcommand{\limp}{\rightarrow}
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\lequiv}{\sim}
+\newcommand{\iso}{\cong}
+\newcommand{\ele}{\le_{\mathrm{eff}}}
+\newcommand{\esim}{\sim_{\mathrm{eff}}}
+
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\I}{\mathfrak{I}}
+\newcommand{\proves}{\vdash}
+\newcommand{\free}{\mathrm{free}}
+\newcommand{\union}{\cup}
+\newcommand{\sect}{\cap}
+\newcommand{\bigunion}{\bigcup}
+\newcommand{\bigsect}{\bigcap}
+
+\newcommand{\K}{\mathfrak{K}}
+\newcommand{\mods}{\mathrm{Mod}}
+\newcommand{\A}{\mathfrak{A}}
+\newcommand{\B}{\mathfrak{B}}
+\newcommand{\C}{\mathfrak{C}}
+\newcommand{\F}{\mathfrak{F}}
+
+\newcommand{\ZFC}{\mathrm{ZFC}}
+\newcommand{\PNF}{\mathrm{PNF}}
+\newcommand{\SNF}{\mathrm{SNF}}
+
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\Lf}{\L_{\mathrm{I}}}
+\newcommand{\Ls}{\L_{\mathrm{II}}}
+\newcommand{\Lsw}{\Ls^w}
+\newcommand{\Lo}{\L_{\omega_1\omega}}
+\newcommand{\Lq}{\L_Q}
+\newcommand{\LLo}{L_{\omega_1\omega}}
+
+\newcommand{\biglor}{\textstyle{\bigvee}}
+\newcommand{\thr}{\mathrm{Th}}
+\newcommand{\fiso}{\iso_f}
+\newcommand{\piso}{\iso_p}
+\newcommand{\pisos}{\mathrm{Part}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\ran}{\mathrm{ran}}
+
+\newcommand{\fs}{\Phi_{\mathrm{fs}}}
+\newcommand{\fv}{\Phi_{\mathrm{fv}}}
+\newcommand{\code}[2]{\mathbf{{#1}}^{{#2}}}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+\title{Exercises from \emph{Mathematical Logic}}
+\author{John Peloquin}
+\date{}
+
+\begin{document}
+\maketitle
+\section*{Chapter~II}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.3.}
+$\R$~is uncountable.
+\begin{proof}
+Let $a,b\in\R$ with $a<b$, and $I=[a,b]$. We show that for any given $\alpha:\N\to\R$, there exists an $r\in I$ such that $r\not\in\{\,\alpha(n)\mid n\in\N\,\}$. Thus there is no surjection from~$\N$ onto~$I$, and therefore no surjection from~$\N$ onto~$\R$. It follows from~(1.1) that $\R$~is uncountable, since $\R$~is clearly not finite.
+
+Let $\alpha:\N\to\R$. We define a sequence of subsets $I=I_0\supseteq I_1\supseteq\cdots$ inductively as follows:
+\begin{align*}
+I_0&=I\\
+I_{n+1}&=I_n-\{\alpha(n)\}
+\end{align*}
+It follows that $\alpha(n)\not\in I_{n+1}$ for all $n\in\N$. Now by the completeness of~$\R$, we know that $J=\bigcap_{n\in\N}I_n\ne\emptyset$. Choose $r\in J$. If there exists an $n\in\N$ such that $\alpha(n)=r$, then $\alpha(n)\in J\subseteq I_{n+1}$. So $\alpha(n)\in I_{n+1}$---a contradiction. Thus $r\not\in\{\,\alpha(n)\mid n\in\N\,\}$ as desired.
+\end{proof}
+
+\noindent\textsc{Exercise 1.4.}
+\begin{enumerate}
+\item[(a)] If the sets $M_0,M_1,\ldots$ are at most countable, then the union $U=\bigcup_{n\in\N}M_n$ is at most countable.
+\item[(b)] If $\mathcal{A}$~is an at most countable alphabet, then $\mathcal{A}^*$ (the set of all strings over~$A$) is at most countable.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] From~(1.1) we know that for each~$M_i$ there exists a surjection $\alpha_i:\N\to M_i$. We can therefore enumerate each~$M_i$ as
+$$M_i=\{\alpha_{i0},\alpha_{i1},\alpha_{i2},\ldots\}$$
+and construct the following table:
+\begin{center}
+\begin{tabular}{r|lllll}
+$M_0$&$\alpha_{00}$&$\alpha_{01}$&$\alpha_{02}$&$\alpha_{03}$&$\ldots$\\
+$M_1$&$\alpha_{10}$&$\alpha_{11}$&$\alpha_{12}$&$\alpha_{13}$&$\ldots$\\
+$M_2$&$\alpha_{20}$&$\alpha_{21}$&$\alpha_{22}$&$\alpha_{23}$&$\ldots$\\
+$M_3$&$\alpha_{30}$&$\alpha_{31}$&$\alpha_{32}$&$\alpha_{33}$&$\ldots$\\
+$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\vdots$&$\ddots$
+\end{tabular}
+\end{center}
+Now we can construct a surjection $\alpha:\N\to U$ by proceeding along the diagonals:
+$$U=\{\alpha_{00},\alpha_{10},\alpha_{01},\alpha_{20},\alpha_{11},\alpha_{02},\ldots\}$$
+By~(1.1), it follows that $U$~is at most countable.
+\item[(b)] To prove this, we first claim that there are at most countably many strings over~$\mathcal{A}$ of length~$n$, for all $n\in\N$. We proceed by induction. This is trivially true for $n=0$ and $n=1$ since~$\mathcal{A}$ is at most countable. Suppose the claim is true for strings of length~$n$. Let $S_\alpha^{n+1}$ be the set of all strings of length~$n+1$ over~$\mathcal{A}$ ending in~$\alpha$. Then $S_\alpha^{n+1}$~is at most countable by the induction hypothesis. Now the set~$S^{n+1}$ of all strings of length~$n+1$ over~$\mathcal{A}$ is given by
+$$S^{n+1}=\bigcup_{\alpha\in\mathcal{A}}S_\alpha^{n+1}$$
+Since $\mathcal{A}$~is at most countable, it follows from part~(a) that $S^{n+1}$~is at most countable. Thus our claim is proved by induction.
+
+Now since each string in~$\mathcal{A}^*$ is finite by definition, we have
+$$\mathcal{A}^*=\bigcup_{n\in\N}S^n$$
+Again by part~(a), it follows that $\mathcal{A}^*$~is at most countable as desired.
+\end{enumerate}
+\end{proof}
+
+\noindent\textsc{Exercise 1.5.}
+There is no surjective map from a set~$M$ onto its power set~$\ps(M)$.
+\begin{proof}
+We show that for any map $\alpha:M\to\ps(M)$, there exists a set $S\in\ps(M)$ such that $S$~is not in the range of~$\alpha$. Let $\alpha:M\to\ps(M)$. Choose $S=\{\,a\in M\mid a\not\in\alpha(a)\,\}$. Suppose there exists an $s\in M$ such that $\alpha(s)=S$. If $s\in S$, then by definition of~$S$, $s\not\in\alpha(s)=S$---a contradiction. On the other hand, if $s\not\in S$, then $s\not\in\alpha(s)$, so by definition of~$S$, $s\in S$---a contradiction. In either case, we reach a contradiction, so $S$~is not in the range of~$\alpha$ and $\alpha$~is not surjective.
+\end{proof}
+
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.7.}
+If we alter our formula calculus by omitting parentheses around conjunctions---that is, by writing $\varphi\land\psi$ instead of $(\varphi\land\psi)$---then formulas do not necessarily have unique decompositions. In particular, the $\{P,Q\}$-formula
+$$\chi:=\exists v_0Pv_0\land Qv_1$$
+does not have a unique decomposition and thus does not have a unique set of subformulas.
+\begin{proof}
+We can construct two distinct derivations of~$\chi$. The first one is
+\begin{center}
+\begin{tabular}{rll}
+1.&$Pv_0$&(F2)~using $P,v_0$.\\
+2.&$Qv_1$&(F2)~using $Q,v_1$.\\
+3.&$Pv_0\land Qv_1$&(F4)~modified, applied to (1),(2) using~$\land$.\\
+4.&$\exists v_0Pv_0\land Qv_1$&(F5)~applied to~(3) using $\exists,v_0$.
+\end{tabular}
+\end{center}
+A second derivation uses steps (1)~and~(2) above, but then uses
+\begin{center}
+\begin{tabular}{rll}
+$3'$.&$\exists v_0Pv_0$&(F5)~applied to~(1) using $\exists,v_0$.\\
+$4'$.&$\exists v_0Pv_0\land Qv_1$&(F4)~modified, applied to (2),($3'$) using~$\land$.
+\end{tabular}
+\end{center}
+Under the first decomposition, $\sfs(\chi)=\{\chi,Pv_0\land Qv_1,Qv_1,Pv_0\}$, and under the second decomposition, $\sfs(\chi)=\{\chi,\exists v_0Pv_0,Qv_1,Pv_0\}$.
+\end{proof}
+
+\section*{Chapter~III}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.5.}
+Let $A$~be a nonempty finite set and $S$~a finite symbol set. Then there are only finitely many $S$-structures with domain~$A$.
+\begin{proof}
+Each $S$-structure over~$A$ will contain assignments for the relation and function symbols in~$S$ as well as the constants in~$S$. Now there are only finitely many constant assignments possible; if $m$~is the number of constants in~$S$, and $|A|$~is the cardinality of~$A$, then there are $|A|^m$ possible constant assignments. Furthermore, there are only finitely many $n$-ary relations on~$A$; since any $n$-ary relation~$R$ on~$A$ is a subset of~$A^n$, there are $|P(A^n)|=2^{|A^n|}=2^{|A|^n}$ possible relations. Similarly, there are only finitely many $n$-ary functions on~$A$. Thus there are only finitely many ways to construct an $S$-structure over~$A$.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.4.}
+Every positive $S$-formula has an $S$-interpretation satisfying it.
+\begin{proof}
+Let $\varphi$~be a positive $S$-formula. We choose an $S$-interpretation~$\mathfrak{I}$ with a domain $A=\{a_0\}$ consisting of one element. Use the constant assignment $\beta(x)=a_0$ for variables in~$A_S$; also assign~$a_0$ to each constant symbol in~$S$. Assign to each $n$-ary relation symbol in~$S$ the equality relation, and to each $n$-ary function symbol~$f$ the constant function with value~$a_0$. It follows by induction that for every $S$-term~$t$, $\mathfrak{I}(t)=a_0$.
+
+Now for any terms $t_1,\ldots,t_n\in T^S$, we have $\mathfrak{I}\models t_1\equiv t_2$, and for any $n$-ary relation symbol $R\in S$, $\mathfrak{I}\models Rt_1,\ldots,t_n$. Thus $\mathfrak{I}$~satisfies all atomic $S$-formulas. Furthermore, if $\mathfrak{I}\models\psi$ and $\mathfrak{I}\models\gamma$, then $\mathfrak{I}\models(\psi\land\gamma)$ and $\mathfrak{I}\models(\psi\lor\gamma)$ by definition. Since $\varphi$~is positive, it follows that $\mathfrak{I}\models\varphi$.
+\end{proof}
+
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.12.} Let $\phi$~and~$\psi$ be logically equivalent formulas. Then for each formula~$\chi$, we define~$\chi'$ to be the result of replacing all occurrences of~$\phi$ in~$\chi$ with~$\psi$. This is well-defined, and for all~$\chi$, $\chi$~is equivalent to~$\chi'$.
+\begin{proof}
+We define~$'$ by induction on formulas. We use the developments on pp.~35--6 in order to reduce the induction cases considered.
+\begin{center}
+\begin{tabular}{rl}
+$\chi=t_1\equiv t_2$, $\chi=Rt_1,\ldots,t_n$:&$\chi'=\begin{cases}\psi&\text{if $\chi=\phi$}\\\chi&\text{otherwise}\end{cases}$\\
+$\chi=\lnot\gamma$:&$\chi'=\lnot\gamma'$.\\
+$\chi=(\gamma\lor\xi)$:&$\chi'=(\gamma'\lor\xi')$.\\
+$\chi=\exists x\gamma$:&$\chi'=\exists x\gamma'$.
+\end{tabular}
+\end{center}
+It is easy to see by induction that $\chi$~is equivalent to~$\chi'$ for all~$\chi$.
+\end{proof}
+
+\subsection*{Section~5}
+\noindent\textsc{Exercise 5.11.}
+\begin{enumerate}
+\item[(a)] The negation of of a universal sentence is logically equivalent to an existential sentence, and the negation of an existential sentence is logically equivalent to a universal sentence.
+\item[(b)] If $\mathfrak{A}\subset\mathfrak{B}$ and $\varphi$~is an existential sentence, then if $\mathfrak{A}\models\varphi$, $\mathfrak{B}\models\varphi$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] We prove the first claim by induction on universal sentences. Let $\varphi$~be a quantifier-free (universal) sentence. Then $\lnot\varphi$~is a quantifier-free existential sentence, and trivially $\lnot\varphi\lequiv\lnot\varphi$. Let $\varphi,\psi$ be universal sentences whose negations are logically equivalent to existential sentences. Consider $(\varphi\lor\psi)$. We know $\lnot(\varphi\lor\psi)\lequiv(\lnot\varphi\land\lnot\psi)$, and furthermore, by~(4.12), $(\lnot\varphi\land\lnot\psi)$ is logically equivalent to an existential sentence since $\lnot\varphi$~and~$\lnot\psi$ are by the induction hypothesis. By transitivity of equivalence, the result holds for $(\varphi\lor\psi)$. Similarly for $(\varphi\land\psi)$. Now consider~$\forall x\varphi$. We know that $\lnot\forall x\varphi\lequiv\exists x\lnot\varphi$, and $\exists x\lnot\varphi$~is equivalent to an existential sentence since $\lnot\varphi$~is by hypothesis. Again by transitivity, the result holds for~$\forall x\varphi$.
+
+The second claim is proved similarly.
+\item[(b)] We know from~(a) that $\lnot\varphi$~is logically equivalent to a universal sentence. Now if $\mathfrak{A}\models\varphi$, then it is not the case that $\mathfrak{A}\models\lnot\varphi$, but then it is not the case that $\mathfrak{B}\models\lnot\varphi$ by~(5.8), so $\mathfrak{B}\models\varphi$.
+\end{enumerate}
+\end{proof}
+
+\subsection*{Section~7}
+\noindent\textsc{Exercise 7.5.}
+Let $\Pi$~be the following set of second order $S_\text{ar}$-sentences:
+\begin{align*}
+&\forall x\lnot x+1\lequ x\\
+&\forall x\forall y(x+1\lequ y+1\limp x\lequ y)\\
+&\forall X((X0\land\forall x(Xx\limp Xx+1))\limp\forall y Xy)\\
+&\forall x\,x+0\lequ x\\
+&\forall x\forall y x+(y+1)\lequ(x+y)+1\\
+&\forall x\,x\cdot0\lequ0\\
+&\forall x\forall y\,x\cdot(y+1)\lequ(x\cdot y)+x
+\end{align*}
+\begin{enumerate}
+\item[(a)] If $\mathfrak{A}=(A,+^A,\cdot^A,0^A,1^A)$ satisfies~$\Pi$, and if $\sigma^A:A\to A$ is defined by $\sigma^A(x)=x+^A1^A$, then the structure $\mathfrak{A}'=(A,\sigma^A,0^A)$ satisfies (P1)--(P3).
+\item[(b)] $\mathfrak{N}=(\N,+,\cdot,0,1)$ is characterized by~$\Pi$ up to isomorphism---that is, $\mathfrak{N}$~satisfies~$\Pi$, and any structure $\mathfrak{A}=(A,+^A,\cdot^A,0^A,1^A)$ satisfying~$\Pi$ is isomorphic to~$\mathfrak{N}$.
+\end{enumerate}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] Suppose $\mathfrak{A}$~satisfies~$\Pi$. Then we know that $\forall x\lnot x+^A1^A\lequ0^A$, so $\forall x\lnot\sigma^A(x)\lequ0^A$; thus $\mathfrak{A}'$~satisfies~(P1). We also know $\forall x\forall y(x+^A1^A\lequ y+^A1^A\limp x\lequ y)$, so $\forall x\forall y(\sigma^A(x)\lequ\sigma^A(y)\limp x\lequ y)$; thus $\sigma^A$~is injective and $\mathfrak{A}'$~satisfies~(P2). Finally, we have
+$$\forall X((X0^A\land(Xx\limp Xx+^A1^A))\limp\forall y Xy)$$
+thus
+$$\forall X((X0^A\land(Xx\limp X\sigma^A(x)))\limp\forall y Xy)$$
+and so $\mathfrak{A}'$~satisfies~(P3) as desired.
+\item[(b)] First, $\mathfrak{N}$~satisfies~$\Pi$. Now suppose $\mathfrak{A}=(A,+^A,\cdot^A,0^A,1^A)$ satisfies~$\Pi$. We prove $\mathfrak{N}\iso\mathfrak{A}$. First, define $\pi:\N\to A$ inductively by
+\begin{align*}
+\pi(0)&=0^A\\
+\pi(n+1)&=\pi(n)+^A1^A
+\end{align*}
+We claim that $\pi$~is a bijection. First let $R$~be the range of~$\pi$. Then $0^A\in R$ since $\pi(0)=0^A$. If $a\in R$, then $\pi(n)=a$ for some $n\in\N$; but then $\pi(n+1)=\pi(n)+^A1^A=a+^A1^A$, so $a+^A1^A\in R$. Since $\mathfrak{A}$~satisfies~$\Pi$, it follows from the induction formula that $R=A$ and $\pi$~is surjective.
+
+To verify injectivity, we must show that for all $m,n\in\N$, if $\pi(m)=\pi(n)$, then $m=n$. We proceed by induction on~$n$. If $n=0$, then $m=0$; for if not, then $\pi(m)=\pi((m-1)+1)=\pi(m-1)+^A1^A\ne0^A=\pi(n)$ (by the first formula in~$\Pi$)---a contradiction. So the claim is true in this case. Now suppose the claim holds for~$n$; we prove it holds for~$n+1$. If $\pi(m)=\pi(n+1)$, then $m\ne0$ (by reasoning similar to that just given). Thus we have
+$$\pi(m)=\pi((m-1)+1)=\pi(m-1)+^A1^A=\pi(n)+^A1^A=\pi(n+1)$$
+which by the second formula in~$\Pi$ yields $\pi(m-1)=\pi(n)$. By the induction hypothesis, $m-1=n$, so $m=n+1$ and the claim holds for~$n+1$ as desired.
+
+Now that we know $\pi:\N\iso A$, we must show that for all $m,n\in\N$, $\pi(m+n)=\pi(m)+^A\pi(n)$; we proceed by induction on~$n$. For $n=0$, we have
+$$\pi(m+0)=\pi(m)=\pi(m)+^A0^A=\pi(m)+^A\pi(0)$$
+the second equality holding by the fourth formula in~$\Pi$. If the claim holds for $n$, then we have
+\begin{align*}
+\pi(m+(n+1))&=\pi((m+n)+1)&&\\
+            &=\pi(m+n)+^A1^A&&\\
+            &=[\pi(m)+^A\pi(n)]+^A1^A&&\text{induction hypothesis}\\
+            &=\pi(m)+^A[\pi(n)+^A1^A]&&\text{fifth formula in~$\Pi$}\\
+            &=\pi(m)+^A\pi(n+1)
+\end{align*}
+so the claim holds for $n+1$ as desired.
+
+Similarly, we verify that for all $m,n\in\N$, $\pi(m\cdot n)=\pi(m)\cdot^A\pi(n)$. For $n=0$,
+$$\pi(m\cdot0)=\pi(0)=0^A=\pi(m)\cdot^A0^A=\pi(m)\cdot^A\pi(n)$$
+the third equality holding by the sixth formula in~$\Pi$. If the claim holds for~$n$, then
+\begin{align*}
+\pi(m\cdot(n+1))&=\pi(m\cdot n+m)&&\\
+                &=\pi(m\cdot n)+^A\pi(m)&&\text{from above result}\\
+                &=[\pi(m)\cdot^A\pi(n)]+^A\pi(m)&&\text{induction hypothesis}\\
+                &=\pi(m)\cdot^A[\pi(n)+^A1^A]&&\text{seventh formula in~$\Pi$}\\
+                &=\pi(m)\cdot\pi(n+1)
+\end{align*}
+so the result holds for $n+1$.
+
+Finally, we note that $\pi(0)=0^A$ by definition, and
+$$\pi(1)=\pi(0+1)=\pi(0)+^A1^A=0^A+^A1^A=1^A+^A0^A=1^A$$
+Here we omit the proof of commutativity of~$+^A$. We then have that $\mathfrak{N}\iso\mathfrak{A}$ as desired.
+\end{enumerate}
+\end{proof}
+
+\subsection*{Section~8}
+\noindent\textsc{Exercise 8.10.}
+Suppose $x_0,\ldots,x_r$ are pairwise distinct and $x_0,\ldots,x_r\not\in\var(t_0)\cup\ldots\cup\var(t_r)$. Then
+$$\varphi\frac{t_0,\ldots,t_r}{x_0,\ldots,x_r}\lequiv\forall x_0,\ldots,\forall x_r(x_0\lequ t_0\land\ldots\land x_r\lequ t_r\limp\varphi)$$
+\begin{proof}
+The proof requires the following lemma: for any interpretation $\mathfrak{I}=((A,\mathfrak{a}), \beta)$, $a\in A$, variable~$x$, and term~$t$, $\mathfrak{I}\tfrac{a}{x}(t)=\mathfrak{I}(t)$ if $x\not\in\var(t)$. The proof is an easy induction on terms.
+
+We only sketch the remainder of the proof. The idea is to proceed by induction on~$r$ and then, in each part of this process, by induction on formulas.
+
+Case $r=0$: Suppose $\varphi=t_1'\lequ t_2'$. Then for any interpretation~$\mathfrak{I}$ we have
+\begin{center}
+\begin{tabular}{rcp{0.6\textwidth}}
+$\mathfrak{I}\models\varphi\tfrac{t_0}{x_0}$&iff&$\mathfrak{I}\models[t_1'\lequ t_2']\tfrac{t_0}{x_0}$\\
+    &iff&$\mathfrak{I}\tfrac{\mathfrak{I}(t_0)}{x_0}\models t_1'\lequ t_2'$\newline(by Substitution Lemma)\\
+    &iff&$\mathfrak{I}\tfrac{\mathfrak{I}(t_0)}{x_0}(t_1')=\mathfrak{I}\tfrac{\mathfrak{I}(t_0)}{x_0}(t_2')$\\
+    &iff&For all $a_0\in A$, if $a_0=\mathfrak{I}(t_0)$, then $\mathfrak{I}\tfrac{a_0}{x_0}(t_1')=\mathfrak{I}\tfrac{a_0}{x_0}(t_2')$\\
+    &iff&For all $a_0\in A$, if $\mathfrak{I}\tfrac{a_0}{x_0}(x_0)=\mathfrak{I}\tfrac{a_0}{x_0}(t_0)$, then $\mathfrak{I}\tfrac{a_0}{x_0}(t_1')=\mathfrak{I}\tfrac{a_0}{x_0}(t_2')$\newline(by our lemma since $x_0\not\in\var(t_0)$)\\
+    &iff&For all $a_0\in A$, if $\mathfrak{I}\tfrac{a_0}{x_0}\models x_0\lequ t_0$, then $\mathfrak{I}\tfrac{a_0}{x_0}\models t_1'\lequ t_2'$\\
+    &iff&For all $a_0\in A$, $\mathfrak{I}\tfrac{a_0}{x_0}\models x_0\lequ t_0\limp t_1'\lequ t_2'$\\
+    &iff&$\mathfrak{I}\models\forall x_0(x_0\lequ t_0\limp t_1'\lequ t_2')$\\
+    &iff&$\mathfrak{I}\models\forall x_0(x_0\lequ t_0\limp\varphi)$
+\end{tabular}
+\end{center}
+So the result holds in this case. Similarly for the other formula cases. By induction on formulas, the result holds for all formulas when $r=0$.
+
+Now suppose the result holds for~$r$ (for all formulas); we prove it holds for $r+1$. Again, consider the case when $\varphi=t_1'\lequ t_2'$. Then we have
+\begin{center}
+\begin{tabular}{rcp{0.6\textwidth}}
+$\mathfrak{I}\models\varphi\tfrac{t_0,\ldots,t_{r+1}}{x_0,\ldots,x_{r+1}}$&iff&$\mathfrak{I}\models\left[\varphi\tfrac{t_0,\ldots,t_r}{x_0,\ldots,x_r}\right]\tfrac{t_{r+1}}{x_{r+1}}$\newline(since $x_{r+1}\ne t_i$)\\
+    &iff&$\mathfrak{I}\tfrac{\mathfrak{I}(t_{r+1})}{x_{r+1}}\models\varphi\tfrac{t_0,\ldots,t_r}{x_0,\ldots,x_r}$\newline(by Substitution Lemma)\\
+    &iff&$\mathfrak{I}\tfrac{\mathfrak{I}(t_{r+1})}{x_{r+1}}\models\forall x_0,\ldots,\forall x_r(x_0\lequ t_0\land\cdots\land x_r\lequ t_r\limp\varphi)$\newline(by induction hypothesis)\\
+    &iff&$\mathfrak{I}\models\forall x_0,\ldots,\forall x_{r+1}(x_0\lequ t_0\land\cdots\land x_r\lequ t_r\land x_{r+1}\lequ t_{r+1}\limp\varphi)$\newline(as in case $r=0$)
+\end{tabular}
+\end{center}
+So the result holds in this case. Similarly for other formula cases. By induction on formulas, the result holds for all formulas for~$r+1$.
+
+By induction on~$\N$, then, the result holds for all~$r$.
+\end{proof}
+
+\section*{Chapter~IV}
+
+\subsection*{Section~2}
+\noindent\textsc{Exercise 2.7(a).}
+The following rule is correct:
+\begin{center}
+\begin{tabular}{lll}
+$\Gamma$&$\varphi_1$&$\psi_1$\\
+$\Gamma$&$\varphi_2$&$\psi_2$\\
+\hline
+$\Gamma$&$(\varphi_1\lor\varphi_2)$&$(\psi_1\lor\psi_2)$
+\end{tabular}
+\end{center}
+\begin{proof}
+Suppose $\Gamma\varphi_1\models\psi_1$ and $\Gamma\varphi_2\models\psi_2$. Let $\mathfrak{I}$~be any interpretation satisfying $\Gamma(\varphi_1\lor\varphi_2)$. Then, by definition, $\mathfrak{I}\models\varphi_1$ or $\mathfrak{I}\models\varphi_2$. In the first case, $\mathfrak{I}\models\psi_1$ since $\Gamma\varphi_1\models\psi_1$; similarly, in the second case, $\mathfrak{I}\models\psi_2$; so $\mathfrak{I}\models(\psi_1\lor\psi_2)$ by definition. Thus $\Gamma(\varphi_1\lor\varphi_2)\models(\psi_1\lor\psi_2)$ and the result follows.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.6.}
+\begin{enumerate}
+\item[(a)] We can justify the (derived) sequent rule
+\begin{center}
+\begin{tabular}{ll}
+$\Gamma$&$\varphi$\\
+\hline
+$\Gamma$&$\lnot\lnot\varphi$
+\end{tabular}
+\end{center}
+as follows:
+\begin{center}
+\begin{tabular}{rllll}
+1.&$\Gamma$&&$\varphi$&Premise\\
+2.&$\Gamma$&$\lnot\varphi$&$\varphi$&(Ant) applied to~1.\\
+3.&$\Gamma$&$\lnot\varphi$&$\lnot\varphi$&(Assm)\\
+4.&$\Gamma$&$\lnot\varphi$&$\lnot\lnot\varphi$&(Ctr') applied to 2,3.\\
+5.&$\Gamma$&$\lnot\lnot\varphi$&$\lnot\lnot\varphi$&(Assm)\\
+6.&$\Gamma$&&$\lnot\lnot\varphi$&(PC) applied to 4,5.
+\end{tabular}
+\end{center}
+We can justify
+\begin{center}
+\begin{tabular}{ll}
+$\Gamma$&$\lnot\lnot\varphi$\\
+\hline
+$\Gamma$&$\varphi$
+\end{tabular}
+\end{center}
+as follows:
+\begin{center}
+\begin{tabular}{rllll}
+1.&$\Gamma$&&$\lnot\lnot\varphi$&Premise\\
+2.&$\Gamma$&$\lnot\varphi$&$\lnot\lnot\varphi$&(Ant) applied to~1.\\
+3.&$\Gamma$&$\lnot\varphi$&$\lnot\varphi$&(Assm)\\
+4.&$\Gamma$&&$\varphi$&(Ctr) applied to 2,3.
+\end{tabular}
+\end{center}
+\item[(d)] We can justify
+\begin{center}
+\begin{tabular}{ll}
+$\Gamma$&$(\varphi\land\psi)$\\
+\hline
+$\Gamma$&$\varphi$
+\end{tabular}
+\end{center}
+as follows, recalling that $(\varphi\land\psi)=\lnot(\lnot\varphi\lor\lnot\psi)$ since we have formally dropped the~$\land$ connective from our logical symbols:
+\begin{center}
+\begin{tabular}{rllll}
+1.&$\Gamma$&&$\lnot(\lnot\varphi\lor\lnot\psi)$&Premise\\
+2.&$\Gamma$&$\lnot\varphi$&$\lnot\varphi$&(Assm)\\
+3.&$\Gamma$&$\lnot\varphi$&$(\lnot\varphi\lor\lnot\psi)$&($\lor$S) applied to~2.\\
+4.&$\Gamma$&$\lnot\varphi$&$\lnot(\lnot\varphi\lor\lnot\psi)$&(Ant) applied to~1.\\
+5.&$\Gamma$&&$\varphi$&(Ctr) applied to 3,4.
+\end{tabular}
+\end{center}
+\end{enumerate}
+
+\section*{Chapter~V}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.13.}
+Let $S$~be an arbitrary symbol set and suppose $\Phi$~is an inconsistent set of formulas. By IV.7.2(b), it follows that for any terms $t_1,t_2$, $\Phi\proves t_1\lequ t_2$. Thus $T^\Phi$, the domain of~$\I^\Phi$, consists of only one equivalence class. It follows that the interpretations of variable, constant, and function symbols are determined. For any $n$-ary relation symbol $R\in S$ and terms $t_1,\ldots,t_n$, $\Phi\proves Rt_1\cdots t_n$; thus $R^{\I^\Phi}=(T^\Phi)^n$. This determines~$\I^\Phi$.
+
+We see that $\I^\Phi$~does not depend on~$\Phi$ (only its inconsistency).
+
+\section*{Chapter~VI}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.3.}
+Let $\Phi$~be a consistent, at most countable set of formulas, and suppose that $\Phi$~is satisfied by an infinite model. Then $\Phi$~is satisfied by a countable model.
+\begin{proof}
+Immediate by the L\"owenheim-Skolem-Tarski theorem.
+\end{proof}
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.7.}
+Suppose $\K$~is $\Delta$-elementary. Then the class~$\K^\infty$ of infinite structures in~$\K$ is also $\Delta$-elementary.
+\begin{proof}
+Choose $\Phi$~such that $\K=\mods^S\Phi$. Define
+$$\varphi^{\ge n}=\exists x_1\cdots\exists x_n(\lnot(x_1\lequ x_2)\land\cdots\land\lnot(x_1\lequ x_n)\land\cdots\land\lnot(x_{n-1}\lequ x_n))$$
+which states that there exist (at least) $n$~distinct elements (for $n\ge 2$), and set
+$$\Phi'=\{\,\varphi^{\ge n}\mid n\ge 2\,\}$$
+Now define $\Phi^\infty=\Phi\union\Phi'$. We claim that $\K^\infty=\mods^S\Phi^\infty$. Indeed, $\A\in\K^\infty$ if and only if $\A\in\K$ and $\A$~is infinite, which holds if and only if $\A\models\Phi$ and $\A\models\Phi'$, which holds if and only if $\A\models\Phi^\infty$, which holds if and only if $\A\in\mods^S\Phi^\infty$.
+\end{proof}
+
+\noindent\textsc{Exercise 3.8.}
+Let $\K$~be a class of $S$-structures and $\Phi\subseteq L_0^S$. We say that $\Phi$~is a \emph{system of axioms} for~$\K$ if and only if $\K=\mods^S\Phi$.
+\begin{enumerate}
+\item[(a)] A class~$\K$ is elementary if and only if it has a finite system of axioms.
+\begin{proof}
+If $\K$~is elementary, then $\K=\mods^S\varphi$ for some sentence~$\varphi$; set $\Phi=\{\varphi\}$. Conversely, suppose $\K=\mods^S\Phi$, where $\Phi=\{\varphi_1,\ldots,\varphi_n\}$. Define
+$$\varphi=\varphi_1\land\cdots\land\varphi_n$$
+Then $\K=\mods^s\varphi$, so $\K$~is elementary as desired.
+\end{proof}
+\item[(b)] If $\K$~is elementary and $\K=\mods^S\Phi$, then there exists a finite subset~$\Phi_0$ of~$\Phi$ such that $\K=\mods^S\Phi_0$.
+\begin{proof}
+Let $\varphi$~be a sentence such that $\K=\mods^S\varphi$. Then $\mods^S\Phi=\mods^S\varphi$, so $\Phi\models\varphi$, and by completeness $\Phi\proves\varphi$. But since proofs are finite, there exists a finite $\Phi_0\subseteq\Phi$ such that $\Phi_0\proves\varphi$, and (by soundness) $\Phi_0\models\varphi$. Thus $\mods^S\Phi_0\subseteq\mods^S\varphi$. Noting that $\varphi\models\Phi\models\Phi_0$, it follows that $\K=\mods^S\Phi_0$ as desired.
+\end{proof}
+\end{enumerate}
+
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.8.}
+Let $S=\{0,1,+,\times,<\}$ and $\varphi$~be an $S$-sentence. If $\varphi$~is valid in all non-archimedean ordered fields, then $\varphi$~is valid in all ordered fields.
+\begin{proof}
+Let $\F$~be an arbitrary ordered field. We can construct a non-archimedean ordered field~$\F'$ elementarily equivalent to~$\F$ (see proof of Theorem 4.5). Then $\F'\models\varphi$ by hypothesis, so $\F\models\varphi$. The result follows.
+\end{proof}
+
+\section*{Chapter~VII}
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.4.}
+There is no circularity inherent in the relationship between ZFC and first-order logic. While it is \emph{possible} to encode the axioms of ZFC in first-order logic and consider models of ZFC for object set theory, it is not \emph{necessary} to do so in order to use ZFC for background set theory---in particular for the set theory required to construct the objects of first-order logic. The fallacy in the line of reasoning leading us to the purported circle is the claim that the machinery of first-order logic is \emph{required} to use ZFC for a background set theory.
+
+\section*{Chapter~VIII}
+
+\subsection*{Section~2}
+\noindent\textsc{Exercise 2.8.}
+(We provide an alternate proof of Theorem 1.3(a) using Theorem 2.2.) Let $S$~be a symbol set and $S^r$~be the induced relational symbol set for~$S$. For every $\psi\in L^S$, there exists a $\psi^r\in L^{S^r}$ such that for all $S$-interpretations $\I=(\A,\beta)$,
+$$(\A,\beta)\models\psi\quad\text{iff}\quad(\A^r,\beta)\models\psi^r$$
+where $\A^r$~is the induced $S^r$-structure associated with~$\A$.
+\begin{proof}
+We define a syntactic interpretation~$I$ of~$S$ in~$S^r$; that is, we define a mapping $I:S\union\{S\}\to L^{S^r}$ as follows:
+\begin{center}
+\begin{tabular}{rcl}
+$S$&$\mapsto$&$v_0\lequ v_0$\\
+$n$-ary $R$&$\mapsto$&$Rv_0\cdots v_{n-1}$\\
+$n$-ary $f$&$\mapsto$&$Fv_0\cdots v_{n-1}v_n$\\
+$c$&$\mapsto$&$Cv_0$
+\end{tabular}
+\end{center}
+where (each) $F\in S^r$ corresponds to $f\in S$, and similarly $C\in S^r$ to $c\in S$.
+
+Now it is immediate from definitions that for an arbitrary $S$-interpretation $\I=(\A,\beta)$, we have $\A^r\models\Phi_I$. We further claim that $(\A^r)^{-I}=\A$. Indeed, since $\A^r\models(v_0\lequ v_0)[a]$ for all $a\in A$, we have $A^{-I}=A$. For $n$-ary $f\in S$ and $a_0,\ldots,a_n\in A$,
+\begin{align*}
+&f^{(\A^r)^{-I}}(a_0,\ldots,a_{n-1})=a_n&&\text{iff}&&\A^r\models Fv_0\cdots v_{n-1}v_n[a_0,\ldots,a_{n-1},a_n]\\
+    &&&\text{iff}&&F^{\A^r}(a_0,\ldots,a_{n-1},a_n)\\
+    &&&\text{iff}&&f^{\A}(a_0,\ldots,a_{n-1})=a_n
+\end{align*}
+So $f^{(\A^r)^{-I}}=f^{\A}$. Similarly for relation and constant symbols. Thus the claim holds.
+
+Given that the claim holds, the desired result follows immediately from Theorem 2.2 with each $\psi^r=\psi^I$.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.4.}
+(An extension by definitions of an extension by definitions of a set~$\Phi$ of $S$-sentences is an extension by definitions of~$\Phi$.)
+
+Let $S$~be a symbol set and $\Phi$~be a set of $S$-sentences. Suppose $s\not\in S$ and $\delta_s$~is an $S$-definition of~$s$ in~$\Phi$. Define $S'=S\union\{s\}$ and $\Phi'=\Phi\union\{\delta_s\}$. Now suppose $s'\not\in S'$ and $\delta_{s'}$~is an $S'$-definition of~$s'$ in~$\Phi'$, with associated formula $\varphi_{s'}(v_0,\ldots,v_n)\in L^{S'}$. Assume $\varphi_{s'}$~is term-reduced (Theorem 1.2), and let $\varphi_{s'}^I\in L^S$ be the canonical interpretation of~$\varphi_{s'}$ under the canonical syntactic interpretation~$I$ of~$S'$ in~$S$---that is, using~$\varphi_s$---with $\free(\varphi_{s'}^I)=\free(\varphi_{s'})$. Set
+$$\delta_{s'}^I=\forall v_0\cdots\forall v_n(\varphi_{\mathrm{def}}\liff\varphi_{s'}^I(v_0,\ldots,v_n))$$
+where
+$$\varphi_{\mathrm{def}}=\begin{cases}s'v_0\cdots v_n&\text{if $s'$~is an $(n+1)$-ary relation symbol}\\s' v_0\cdots v_{n-1}\lequ v_n&\text{if $s'$~is an $n$-ary function symbol}\\s'\lequ v_0&\text{if $s'$~is a constant symbol ($n=0$)}\end{cases}$$
+Then $\Phi''=\Phi\union\{\delta_s,\delta_{s'}^I\}$ is an extension by definitions of~$\Phi$.
+\begin{proof}
+We must prove that $\delta_{s'}^I$~is an $S$-definition of~$s'$ in~$\Phi$. If $s'$~is a relation symbol, it is sufficient to note that $\varphi_{s'}^I\in L^S$ and has the same free variables as~$\varphi_{s'}$. Suppose $s'$~is an $n$-ary function symbol. Then we know, by definition,
+$$\Phi'\models\forall v_0\cdots\forall v_{n-1}\exists^{=1}v_n\varphi_{s'}$$
+But then, by Theorem 3.2, and since $\varphi_{s'}$~is term-reduced,
+$$\Phi\models[\forall v_0\cdots\forall v_{n-1}\exists^{=1}v_n\varphi_{s'}]^I=\forall v_0\cdots\forall v_{n-1}\exists^{=1}v_n\varphi_{s'}^I$$
+Thus $\delta_{s'}^I$~is an $S$-definition of~$s$ in~$\Phi$ as desired. Similarly for the case when $s$~is a constant symbol. So the desired result holds.
+\end{proof}
+\begin{rmk}
+We cannot in general claim that $\Phi\union\{\delta_s,\delta_{s'}\}$ is an extension by definitions of~$\Phi$. This would require that $\delta_{s'}$~be an $S$-definition of~$s'$ in~$\Phi$, but there are many examples where this is not the case. Consider, for example, $S=\{\in\}$ and $\Phi=\ZFC$. Define symbol~`$\subseteq$' using
+$$\delta_{\subseteq}=\forall x\forall y(x\subseteq y\liff \forall z(z\in x\limp z\in y))$$
+Now define `$\subset$' using
+$$\delta_{\subset}=\forall x\forall y(x\subset y\liff(x\subseteq y\land\lnot(x\lequ y)))$$
+It is impossible for $\delta_{\subset}$~to be an $S$-definition since it syntactically contains the symbol~`$\subseteq$' in its associated formula.
+\end{rmk}
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.6.}
+For the purposes of this exercise, let $\SNF(\varphi)$~denote the Skolem normal form of~$\varphi$ as constructed in the proof of Theorem 4.5.
+
+Let $\varphi\in L_0^S$ and $\psi=\SNF(\varphi)$. Choose $S'\supseteq S$ such that $\psi\in L_0^{S'}$. Then for every $S$-structure~$\A$, $\A\models\varphi$ if and only if there exists an $S'$-extension~$\A'$ of~$\A$ such that $\A'\models\psi$.
+\begin{proof}
+We may assume that $\varphi$~is in prenex normal form, for if $\PNF(\varphi)$~denotes the prenex normal form of~$\varphi$ as in Theorem 4.4, we see from the proof of Theorem 4.5 that
+$$\SNF(\varphi)=\SNF(\PNF(\varphi))$$
+We proceed by induction on the number~$n$ of existential quantifiers in~$\varphi$. If $n=0$, the result holds trivially, so suppose $n>0$ and the result holds for $n-1$. Write
+$$\varphi=\forall x_1\cdots\forall x_k\exists x_{k+1}Q_{k+2}x_{k+2}\cdots Q_mx_m\varphi_0$$
+where $x_1,\ldots,x_m$ are pairwise distinct, $Q_i\in\{\forall,\exists\}$ for $k+2\le i\le m$, and $\varphi_0$~is quantifier-free. We execute one step in the procedure used to construct~$\psi$. Set
+$$\varphi_1=Q_{k+2}x_{k+2}\cdots Q_mx_m\varphi_0$$
+and choose $f_{k+1}\in S'-S$ appropriately as a $k$-ary function symbol if $k\ne0$ or as a constant symbol if $k=0$. Define
+$$\psi'=[\forall x_1\cdots\forall x_k\varphi_1]\frac{f_{k+1}x_1\cdots x_k}{x_{k+1}}$$
+Now let $\A$~be an $S$-structure and suppose $\A\models\varphi$. It is clear that we can extend~$\A$ to an $S\union\{f_{k+1}\}$-structure~$\A'$ such that $\A'\models\psi'$ by defining $f_{k+1}^{\A'}$~appropriately. Note that $\psi'$~is a sentence whose number of existential quantifiers is $n-1$. By the induction hypothesis then, and the fact that $\psi=\SNF(\psi')$, we can extend~$\A'$ to an $S'$-structure~$\A''$ such that $\A''\models\psi$. Now $\A''$~is the desired $S'$-extension of~$\A$.
+
+Conversely, suppose $\A''$~is an $S'$-extension of~$\A$ such that $\A''\models\psi$. Set $$\A'=\A''|_{S\union\{f_{k+1}\}}=(\A,f_{k+1}^{\A''})$$
+Again by the induction hypothesis and the fact that $\psi=\SNF(\psi')$, $\A'\models\psi'$. It is then immediate that $\A\models\varphi$. Thus the desired result holds for~$\varphi$.
+\end{proof}
+
+\noindent\textsc{Exercise 4.8.}
+Suppose $S$~is a relational symbol set and $\varphi\in L_0^S$ with
+$$\varphi=\exists x_0\cdots\exists x_n\forall y_0\cdots\forall y_m\psi$$
+where $\psi$~is quantifier-free. Then every model of~$\varphi$ has a substructure containing at most $n+1$ elements which is also a model of~$\varphi$.
+\begin{proof}
+Suppose $\A\models\varphi$. Choose $a_0,\ldots,a_n\in A$ such that
+$$\A\models\forall y_0\cdots\forall y_m\psi[a_0,\ldots,a_n]$$
+Let $\B$~be the induced substructure of~$\A$ on $B=\{a_0,\ldots,a_n\}$ (note that $\B$~is well-defined since $S$~is relational). If $b_0,\cdots,b_m\in B$, we have
+$$\A\models\psi[a_0,\ldots,a_n,b_0,\ldots,b_m]$$
+We prove by induction on quantifier-free~$\psi$ that this holds if and only if
+$$\B\models\psi[a_0,\ldots,a_n,b_0,\ldots,b_m]$$
+The atomic cases are immediate since $S$~is relational and thus all terms are variable symbols. The negation and disjunction steps are also immediate from the induction hypothesis. Since $\psi$~is quantifier-free, those are all the cases, and the claim holds.
+
+Since $b_0,\ldots,b_n$ were arbitrary in~$B$, it follows that
+$$\B\models\forall y_0\cdots\forall y_m\psi[a_0,\ldots,a_n]$$
+so, since $a_0,\ldots,a_n\in B$, $\B\models\varphi$ as desired.
+\end{proof}
+\begin{rmk}
+We see that the sentence
+$$\varphi'=\forall x\exists y Rxy$$
+cannot be logically equivalent to a formula in the form of~$\varphi$ above. For $\varphi'$~is satisfied in $\A=(\N,<)$ with $R^{\A}={<}$, but there is no finite substructure of~$\A$ satisfying~$\varphi'$.
+\end{rmk}
+
+\section*{Chapter~IX}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.7.}
+In the system~$\Lsw$ of weak second-order logic, the following holds:
+\begin{enumerate}
+\item[(a)] There exists a sentence~$\varphi$ and a structure~$\A$ such that $\A\models_w\varphi$ but $\A\not\models\varphi$.
+\begin{proof}
+Let $\A$~be any infinite structure. Consider the sentence
+$$\varphi=\forall X((\forall x\exists^{=1}y Xxy\land\forall x\forall y\forall z((Xxz\land Xyz)\limp x\lequ y))\limp\forall y\exists x Xxy)$$
+(see p.~140). Now $\A\models\varphi$ if and only if $\A$~is finite; thus $\A\not\models\varphi$. But if $\forall X$~quantifies over only finite subsets of~$A^2$, then we claim $\varphi$~is trivially satisfied in~$\A$; indeed, since $A$~is infinite, there is no finite $C\subseteq A^2$ such that
+$$\A\models\forall x\exists^{=1}y Xxy[C]$$
+So the implication in~$\varphi$ holds vacuously for all such assignments.
+\end{proof}
+\item[(b)] For each sentence $\varphi\in L_{\mathrm{II}}^{w,S}$, there is a sentence $\psi\in L_{\mathrm{II}}^S$ such that for all $S$-structures~$\A$,
+$$\A\models_w\varphi\quad\text{iff}\quad\A\models\psi$$
+
+\begin{rmk}
+Note that the definition of~$\models_w$ on p.~142 is ambiguous; the definition should really state
+$$\I\models_w\exists X^n\varphi\quad\text{:iff}\quad\text{there exists a finite $C\subseteq A^n$ such that $\I\frac{C}{X^n}\models_w\varphi$}$$
+where $\models_w$~is also used on the right-hand side.
+\end{rmk}
+\begin{proof}
+We prove the stronger claim that for each formula $\varphi\in L_{\mathrm{II}}^{w,S}$, there exists a formula $\psi\in L_{\mathrm{II}}^S$ with $\free(\varphi)=\free(\psi)$ such that for all $S$-interpretations $\I=(\A,\gamma)$,
+$$\I\models_w\varphi\quad\text{iff}\quad\I\models\psi$$
+We proceed by induction on~$\varphi$. The atomic cases are immediate since the relations $\models_w$~and~$\models$ are defined in the same way there, so we can simply choose $\psi=\varphi$. The boolean cases are also immediate using the induction hypothesis and the definitions of weak and strong satisfaction. Suppose $\varphi=\exists x\varphi'$ and $\psi'$~corresponds to~$\varphi'$ by the induction hypothesis. We have, for any~$\I$,
+\begin{align*}
+&\I\models_w\exists x\varphi'&&\text{iff}&&\text{there exists $a\in A$ such that $\I\tfrac{a}{x}\models_w\varphi'$}\\
+    &&&\text{iff}&&\text{there exists $a\in A$ such that $\I\tfrac{a}{x}\models\psi'$}\\
+    &&&\text{iff}&&\I\models\exists x\psi'
+\end{align*}
+Since $\free(\exists x\varphi')=\free(\exists x\psi')$, we set $\psi=\exists x\psi'$.
+
+Finally, suppose $\varphi=\exists X^n\varphi'$, and let $\psi'$~correspond to~$\varphi'$ by the induction hypothesis. We make use of a formula~$\gamma(X^n)$ which states that $X^n$~is finite ($\gamma$~states that all injective functions on~$X^n$ are surjective; see p.~140). We set $\psi=\exists X^n(\gamma(X^n)\land\psi')$. Then $\free(\varphi)=\free(\psi)$ and, for all~$\I$,
+\begin{align*}
+&\I\models_w\exists X^n\varphi'&&\text{iff}&&\text{there exists a finite $C\subseteq A^n$ such that $\I\tfrac{C}{X^n}\models_w\varphi'$}\\
+    &&&\text{iff}&&\text{there exists a $C\subseteq A^n$ such that $\I\tfrac{C}{X^n}\models\gamma(X^n)$ and $\I\tfrac{C}{X^n}\models\psi'$}\\
+    &&&\text{iff}&&\text{there exists a $C\subseteq A^n$ such that $\I\tfrac{C}{X^n}\models(\gamma(X^n)\land\psi')$}\\
+    &&&\text{iff}&&\I\models\psi
+\end{align*}
+This completes the proof of our stronger claim. The original exercise is an immediate corollary.
+\end{proof}
+\item[(c)] The Compactness Theorem does not hold for~$\Lsw$.
+\begin{proof}
+We construct a finitely weakly satisfiable set of sentences that is not weakly satisfiable. First define
+$$\varphi=\exists X\forall x Xx$$
+Note that for an arbitrary $S$-structure~$\A$, $\A\models_w\varphi$ if and only if $\A$~is finite ($\varphi$~can be considered an $\Lsw$-correlate of~$\varphi_{\mathrm{fin}}$; see p.~140). Now set
+$$\Phi=\{\varphi\}\union\{\,\varphi^{\ge n}\mid n\ge 2\,\}$$
+It is clear that $\Phi$~is finitely weakly satisfiable, but not weakly satisfiable.
+\end{proof}
+\end{enumerate}
+
+\subsection*{Section~2}
+\noindent\textsc{Exercise 2.8(b).} The isomorphism class of~$(\Z,<)$ is axiomatizable by an $\Lo$-sentence.
+\begin{proof}
+We construct an $\Lo$-sentence~$\varphi$ which states:
+\begin{enumerate}
+\item[($*$)] The relation~$<$ defines on the domain a linear ordering without endpoints such that between any two distinct elements there exist only finitely many elements.
+\end{enumerate}
+Formally, set
+\begin{multline*}
+\varphi_{\mathrm{lin}}=\forall x\lnot(x<x)\land\forall x\forall y\forall z((x<y\land y<z)\limp x<z)\\
+    \land\forall x\forall y(x<y\lor x\lequ y\lor y<x)\land\forall x\exists y(x<y)\land\forall x\exists y(y<x)
+\end{multline*}
+Let
+$$\varphi_{\mathrm{fin}}=\forall x\forall y(x<y\limp\biglor\Phi)$$
+where
+$$\Phi=\{\,\exists x_1\cdots\exists x_n\forall z((x\le z\land z\le y)\limp(z\lequ x_1\lor\cdots\lor z\lequ x_n))\mid n\ge2\,\}$$
+Finally, define $\varphi=\varphi_{\mathrm{lin}}\land\varphi_{\mathrm{fin}}$.
+
+It is clear that if $\A\iso(\Z,<)$, then $\A\models\varphi$. Now let $\A=(A,<_A)$ be a $\{<\}$-structure and suppose $\A\models\varphi$. By~($*$), we know that $<_A$~is a linear ordering without endpoints such that between any two distinct elements there are only finitely many elements. In particular, $A$~is countably infinite. Indeed, $A$~is infinite since there is no greatest (or least) element on the linear~$<_A$, and $A$~is countable since it can be written as the union of all finite intervals centered about some point in~$A$---a countable union of finite sets.
+
+We can now easily define an isomorphism~$\pi$ from~$\A$ to $(\Z,<)$. Let $a_0,a_1,a_2,\ldots$ be an enumeration of~$A$. Define
+$$\pi(a_i)=
+\begin{cases}
+0&\text{if $a_0=a_i$}\\
+n&\text{if $a_0<_A a_i$ and $a_0$~and~$a_i$ are separated by $n-1$~elements}\\
+-n&\text{if $a_i<_A a_0$ and $a_0$~and~$a_i$ are separated by $n-1$~elements}
+\end{cases}$$
+By the properties of~$<_A$, it is immediate that $\pi$~is a well-defined bijection. It is easy to verify that $\pi$~preserves order. Thus $\pi$~is an isomorphism and the proof is complete.
+\end{proof}
+\noindent\textsc{Exercise 2.9.}
+\begin{enumerate}
+\item[(a)] For arbitrary~$S$, $\LLo^S$~is uncountable.
+\begin{proof}
+We use a diagonal argument. Suppose $\LLo^S$~is at most countable for some~$S$. Then the subset $L\subseteq\LLo^S$ consisting of all countable disjunctions is at most countable. In fact, $L$~is countable since
+$$\{\,\biglor\Phi_i\mid i\in\N\,\}\subseteq L$$
+is infinite, where
+$$\Phi_i=\{\,v_i\lequ v_j\mid j\in\N\,\}$$
+Let $\varphi_1,\varphi_2,\ldots$ be an enumeration of~$L$. We can write
+$$\varphi_i=\psi_{i,1}\lor\psi_{i,2}\lor\cdots$$
+Now define an infinite disjunction $\varphi=\psi_1\lor\psi_2\lor\cdots$ where $\psi_i=\lnot\psi_{i,i}$. By hypothesis, we must have $\varphi=\varphi_j$ for some~$j$. But $\varphi$~and~$\varphi_j$ disagree (syntactically) at the $j$-th disjunct by construction---a contradiction. Thus our original assumption that $\LLo^S$~is at most countable is incorrect, as desired.
+\end{proof}
+\end{enumerate}
+
+\section*{Chapter~X}
+
+\subsection*{Section~1}
+\noindent\textbf{Note:} In the following exercises, it is assumed that all alphabets are is finite.
+
+\bigskip\noindent\textsc{Exercise 1.2.}
+Let $\mathcal{A}$~be an alphabet and $W,W'$ be decidable subsets of~$\mathcal{A}^*$. Then $W\union W'$, $W\sect W'$, and $\mathcal{A}^*\backslash W$ ($\mathcal{A}^*\backslash W'$) are also decidable.
+\begin{proof}
+To decide $W\union W'$: given $\zeta\in\mathcal{A}^*$, determine whether $\zeta\in W$. If so, halt; if not, determine whether $\zeta\in W'$. If so, halt; if not, print a nonempty string and halt.
+
+To decide $W\sect W'$: given $\zeta\in\mathcal{A}^*$, determine whether $\zeta\in W$. If not, print a nonempty string and halt; if so, determine whether $\zeta\in W'$. If not, print a nonempty string and halt; if so, halt.
+
+To decide $\mathcal{A}^*\backslash W$: given $\zeta\in\mathcal{A}^*$, simply decide whether $\zeta\in W$ and do the opposite action (that is, halt if $\zeta\not\in W$, and print a nonempty string and halt if $\zeta\in W$).
+\end{proof}
+
+\noindent\textsc{Exercise 1.3.} For this exercise it is sufficient to note that we can construct decision procedures for variable symbols and formulas over~$\mathcal{A}_0$, as well as for the set of free variables in a formula. The latter decision procedure relies on the recursive definition of $\free(\varphi)$ for a formula~$\varphi$.
+
+\bigskip\noindent\textsc{Exercise 1.9.}
+Let $W\subseteq U\subseteq\mathcal{A}^*$ and suppose $U$~is decidable. Then if $W$~and~$U\backslash W$ are both enumerable, $W$~is decidable.
+\begin{proof}
+We can construct a decision procedure for~$W$ as follows: given $\zeta\in\mathcal{A}^*$, first determine whether $\zeta\in U$. If not, $\zeta\not\in W$, so print a nonempty string and halt; if so, run the enumeration procedures for $W$~and~$U\backslash W$ simultaneously until $\zeta$~appears in the output of one of them ($\zeta$~is guaranteed to appear in the output of one of the procedures, since $\zeta\in U$). If $\zeta\in W$, halt; if $\zeta\in U\backslash W$, print a nonempty string and halt.
+\end{proof}
+
+\noindent\textsc{Exercise 1.10.} Let $\mathcal{A}_1\subseteq\mathcal{A}_2$ be alphabets and $W\subseteq\mathcal{A}_1^*$. Then $W$~is decidable in~$\mathcal{A}_1^*$ if and only if $W$~is decidable in~$\mathcal{A}_2^*$.
+\begin{proof}
+If $W$~is decidable in~$\mathcal{A}_2^*$, it is immediate that $W$~is decidable in~$\mathcal{A}_1^*$ since we have $\mathcal{A}_1^*\subseteq\mathcal{A}_2^*$. Now suppose $W$~is decidable in $\mathcal{A}_1^*$. By Theorem~1.8, it follows that $W$~and~$\mathcal{A}_1^*\backslash W$ are both enumerable (note that this relies on the fact that $\mathcal{A}_1$~is finite; see note above). Now (again since $\mathcal{A}_1$~is finite), it is clear that $\mathcal{A}_1^*$~is decidable in~$\mathcal{A}_2^*$. Thus it follows from \textsc{Exercise 1.9} that $W$~is decidable in~$\mathcal{A}_2^*$ as desired.
+\end{proof}
+
+\subsection*{Section~2}
+\noindent\textsc{Exercise 2.11.}
+Suppose $W\subseteq\mathcal{A}^*$. Then $W$~is R-enumerable if and only if there exists a program~$P$ such that $P:\zeta\mapsto\square$ if $\zeta\in W$ and $P:\zeta\mapsto\infty$ if $\zeta\not\in W$.
+\begin{proof}
+Suppose $W$~is R-enumerable. Then there exists a program~$P$ that, started with the empty input, eventually prints exactly the elements of~$W$ (in other words, for any string $\zeta\in W$, $W$~prints~$\zeta$ in finitely many steps, and $W$~prints only strings in~$W$). We can hack~$P$ to create the desired program~$P'$. First, add code before the code of~$P$ that copies~$\zeta$ from~$R_0$ into a register~$R_i$ unused by~$P$ (note that all labels for $P$~instructions, including those referenced in IF instructions, must be modified to preserve functionality). Now replace in~$P$ all instructions of the form
+\begin{quote}
+$L$ PRINT
+\end{quote}
+with code that compares $R_0$~and~$R_i$ and does the following: if there is a match, it adds a character to another register~$R_j$ unused by~$P$ and jumps to the halt instruction of~$P$, and if there is not a match, it simply proceeds to the next instruction (again all labels for $P$~instructions must be modified). Finally, replace the halt instruction of~$P$ with code that checks whether $R_j$~is nonempty, halting if so and entering an infinite loop if not. We see that $P'$~is the desired program.\footnote{Note that the use of regiser~$R_j$ was necessary to ensure that $P':\zeta\mapsto\infty$ in the case that $W$~is finite.}
+
+Now suppose conversely that there exists such a program~$P$. We sketch a `multithreaded' enumeration procedure for~$W$. First hack~$P$ to a program~$P'$ such that $P':\zeta\mapsto\zeta$ if $\zeta\in W$ and $P':\zeta\mapsto\infty$, printing nothing, if $\zeta\not\in W$ (this can be done by modifying the PRINT instructions of~$P$). Let $Q$~be an enumeration procedure for~$\mathcal{A}^*$. Hack~$Q$ by replacing all PRINT instructions with code that starts a new instance of~$P'$ with input from~$R_0$ and continues running (in other words, $P'$~is run in a new thread each time). It is clear that this program is an enumeration procedure for~$W$.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.5.}
+(An abstract diagonal argument.)
+\begin{enumerate}
+\item[(a)] Let $M$~be a nonempty set and $R\subseteq M^2$. For $a\in M$, let
+$$M_a=\{\,b\in M\mid Rab\,\}$$
+Let $D=\{\,b\in M\mid\text{not } Rbb\,\}$. Then $D$~is distinct from each~$M_a$.
+\begin{proof}
+Suppose $D=M_a$ for some $a\in M$. Then $Raa$~iff $a\in M_a$ by definition of~$M_a$, which is true iff $a\in D$ by hypothesis, which is true iff not~$Raa$ by definition of~$D$. Thus
+$$Raa\quad\text{iff}\quad\text{not }Raa$$
+---a contradiction.
+\end{proof}
+\item[(b)] Let $M=\mathcal{A}^*$ for a finite alphabet~$\mathcal{A}$. Define $R\subseteq M^2$ by
+$$R\xi\eta\quad\text{iff}\quad\text{$\xi $~G\"odel-numbers a program enumerating a set containing~$\eta $}$$
+Then $D=\{\,\eta\mid\text{not } R\eta\eta\,\}$ is not R-enumerable.
+\begin{proof}
+Suppose $D$~is enumerated by a program~$P$ and let $\xi_P$~be the G\"odel number of~$P$. Then we have $D=M_{\xi_P}$---contradicting~(a).
+\end{proof}
+\item[(c)] Again, let $M=\mathcal{A}^*$ for a finite alphabet~$\mathcal{A}$ and $R\subseteq M^2$ be defined by
+$$R\xi\eta\quad\text{iff}\quad\text{$\xi $~does not G\"odel-number a program~$P$ with $P:\eta\mapsto\text{halt}$}$$
+Then all R-decidable subsets of~$M$ occur among the~$M_{\xi}$, and $D=\Pi_{\text{halt}}'$ (where $\Pi_{\text{halt}}'$~is as in Theorem 3.2).
+\begin{proof}
+For $\eta\in M$, not~$R\eta\eta$ iff $\eta$~G\"odel-numbers a program that halts on~$\eta$. Thus $D=\Pi_{\text{halt}}'$.
+\end{proof}
+\end{enumerate}
+
+\subsection*{Section~4}
+\noindent\textsc{Exercise 4.3.}
+The set~$\Phi$ of satisfiable $S_\infty$-sentences is not R-enumerable.
+\begin{proof}
+Suppose $\Phi$~is enumerated by a program~$P_1$. Let $P_2$~be a program enumerating the $S_\infty$-validities (Theorem 2.8). Then we can construct the following decision procedure for the set of $S_\infty$-validities: given $\varphi\in L_0^{S_\infty}$, run $P_1$~and~$P_2$ simultaneously until either $\varphi$~is printed by~$P_2$ or $\lnot\varphi$~is printed by~$P_1$. One or the other must be printed in finitely many steps, for if $\varphi$~is not a validity, it is not satisfied by some $S_\infty$-structure, hence its negation is satisfiable. If $\varphi$~is printed by~$P_2$, it is a validity; if it is printed by~$P_1$, it is not a validity. Thus we have a decision procedure for the $S_\infty$-validities. But this contradicts Theorem 4.1, so our supposition is false.
+\end{proof}
+
+\subsection*{Section~6.}
+\noindent\textsc{Exercise 6.6.}
+Let $T=\Phi^{\models}$ be a theory and suppose that $\Phi$~is R-enumerable. Then $T$~is R-axiomatizable.
+\begin{proof}
+We must construct an R-decidable set~$\Phi'$ such that $T=\Phi'^{\models}$. Let $\varphi_0,\varphi_1,\ldots$ be an enumeration of~$\Phi$ and set
+$$\Phi'=\{\,\varphi_0\land\cdots\land\varphi_n\mid n\ge 0\,\}$$
+Note that $\Phi'$~is logically equivalent to~$\Phi$, hence $T=\Phi'^{\models}$. But $\Phi'$~can be enumerated naturally in the order $\varphi_0,\varphi_0\land\varphi_1,\ldots$ where the lengths of the successively enumerated sentences are strictly increasing. This means we can construct a decision procedure for~$\Phi'$: given a sentence~$\varphi$, calculate its length~$l$. Now enumerate, in the natural order, the finitely many sentences of~$\Phi'$ with length at most~$l$, comparing each enumerated sentence with~$\varphi$. If a match is found, $\varphi\in\Phi'$; if a match is not found, $\varphi\not\in\Phi'$. Thus $\Phi'$~is R-decidable and $T$~is R-axiomatizable.
+\end{proof}
+\noindent\textsc{Exercise 6.13.}
+Let $\Zs=(\Z,+,\cdot,0,1)$ be the ring of integers (considered as an $S_{\mathrm{ar}}$-structure). Then $\thr(\Zs)$~is not R-decidable.
+\begin{proof}
+We define a computable function~$\pi$ on~$L^{S_{\mathrm{ar}}}$ which maps a formula~$\varphi$ to a formula~$\pi(\varphi)$ with $\free(\varphi)=\free(\pi(\varphi))$ and such that, if $\free(\varphi)\subseteq\{x_0,\ldots,x_{n-1}\}$, then for all $m_0,\ldots,m_{n-1}\in\N$,
+$$\Ns\models\varphi[m_0,\ldots,m_{n-1}]\quad\text{iff}\quad\Zs\models\pi(\varphi)[m_0,\ldots,m_{n-1}]$$
+In particular, for all $\varphi\in L_0^{S_{\mathrm{ar}}}$, $\Ns\models\varphi$ iff $\Zs\models\pi(\varphi)$. Thus, if $\thr(\Zs)$ is R-decidable, a program can be constructed that uses~$\pi$ to decide~$\thr(\Ns)$, contradicting Theorem~6.9.
+
+We make use of the fact that an integer is a natural number iff it is the sum of four squares of integers. Define
+$$\varphi_{\N}(x)=\exists x_1\exists x_2\exists x_3\exists x_4(x\lequ x_1\cdot x_1+x_2\cdot x_2+x_3\cdot x_3+x_4\cdot x_4)$$
+Then for all $z\in\Z$, $z\in\N$ iff $\Zs\models\varphi_{\N}[z]$.
+
+We now define~$\pi$ by induction on formulas. On the atomic formulas, $\pi$~is the identity. For the non-atomic formulas, we set
+\begin{align*}
+\lnot\psi\quad&\mapsto\quad\lnot\pi(\psi)\\
+(\psi_1\limp\psi_2)\quad&\mapsto\quad(\pi(\psi_1)\limp\pi(\psi_2))\\
+\exists x\psi(x)\quad&\mapsto\quad\exists x(\varphi_{\N}(x)\land\pi(\psi(x)))
+\end{align*}
+It is clear that $\pi$~is computable. (Note that the recursion used in the computation of~$\pi$ is guaranteed to complete since $\pi$~is applied to shorter formulas each time.)
+
+We now prove the claims made about~$\pi$ above. It is immediate by induction on formulas that for all~$\varphi\in L^{S_{\mathrm{ar}}}$, $\free(\varphi)=\free(\pi(\varphi))$. The satisfaction claim is also verified by induction on~$\varphi$. The atomic case (there is only the equality case since $S_{\mathrm{ar}}$~contains no relation symbols) is immediate after verifying by induction on terms that for all $S_{\mathrm{ar}}$-terms~$t$, if all the variable symbols in~$t$ are assigned to elements of~$\N$, then $\Zs(t)=\Ns(t)$ (under that assignment). The boolean cases are also immediate. Finally, suppose the claim holds for~$\psi(x,x_0,\ldots,x_{n-1})$ and consider $\varphi=\exists x\psi$. We have, for all $m_0,\ldots,m_{n-1}\in\N$,
+\begin{align*}
+&\Ns\models\exists x\psi[m_0,\ldots,m_{n-1}]\\
+	&\quad\text{iff there is $m\in\N$ such that $\Ns\models\psi[m,m_0,\ldots,m_{n-1}]$}\\
+	&\quad\text{iff there is $m\in\Z$ such that $\Zs\models\varphi_{\N}[m]$ and $\Zs\models\pi(\psi)[m,m_0,\ldots,m_{n-1}]$}\\
+	&\quad\text{iff there is $m\in\Z$ such that $\Zs\models(\varphi_{\N}\land\pi(\psi))[m,m_0,\ldots,m_{n-1}]$}\\
+	&\quad\text{iff $\Zs\models\exists x(\varphi_{\N}\land\pi(\psi))[m_0,\ldots,m_{n-1}]$}\\
+	&\quad\text{iff $\Zs\models\pi(\exists x\psi)[m_0,\ldots,m_{n-1}]$}
+\end{align*}
+Thus the desired claim holds.
+\end{proof}
+
+\section*{Chapter~XII}
+
+\subsection*{Section~1.}
+\noindent\textsc{Exercise 1.9.}
+Let $S=\emptyset$. Then any two infinite $S$-structures are partially isomorphic.
+\begin{proof}
+Let $\A$~and~$\B$ be two infinite $S$-structures. Set
+$$I=\{\,p\in\pisos(\A,\B)\mid\text{$\dom(p)$~is finite}\,\}$$
+We claim $I:\A\piso\B$. Indeed, $I$~is nonempty since $\emptyset\in I$. Suppose $p\in I$ and $a\in A$. If $a\not\in\dom(p)$, note that since $\dom(p)$~is finite, $\ran(p)$~is also finite, and hence $B\backslash\ran(p)$ is nonempty. Choose $b\in B\backslash\ran(p)$ and set $q=p\union\{(a,b)\}$. We see that $q$~is injective and thus, since $S$~is empty, $q$~is a partial isomorphism. Since $\dom(q)$~is finite, $q\in I$, and $q$~is the desired extension of~$p$. The back-property is proved similarly.
+\end{proof}
+
+\noindent\textsc{Exercise 1.10.}
+\begin{enumerate}
+\item[(a)] Consider $\N$~and~$\R$ as $\emptyset$-structures. By \textsc{Exercise 1.9}, $\N\piso\R$, but $\N\not\iso\R$ since there exists no bijection $\pi:\N\to\R$ (see \textsc{Exercise I.1.3}).
+\item[(b)] Let $S=\{\sigma,0\}$ and let $\Phi_{\sigma}$~consist of the successor axioms as in Example~1.8. Using compactness, construct a nonstandard model~$\Ns'$ of~$\Phi_{\sigma}$ such that $\Ns'\not\iso\Ns_{\sigma}$, and assume $\Ns'$~is countable by Lowenheim-Skolem. Since $\Ns_{\sigma}$~and~$\Ns'$ are both at most countable and nonisomorphic, Lemma~1.5(d) gives $\Ns_{\sigma}\not\piso\Ns'$. But since both structures are models of~$\Phi_{\sigma}$, it follows from Example~1.8 that $\Ns_{\sigma}\fiso\Ns'$.
+\end{enumerate}
+
+\subsection*{Section~2}
+\noindent\textsc{Exercise 2.5.}
+Let $S=\emptyset$ and $T=\{\,\varphi^{\ge n}\mid n\ge 2\,\}^{\models}$ be the theory of infinite structures. Then $T$~is complete and R-decidable.
+\begin{proof}
+From \textsc{Exercise 1.9}, we know that any two infinite $S$-structures are partially isomorphic and hence finitely isomorphic (Lemma 1.5(b)). By Fra\"iss\'e's Theorem (Theorem 2.1) then, any two infinite $S$-structures are elementarily equivalent. Noting that an $S$-structure~$\A$ is infinite iff $\A\models T$, it follows from Lemma 2.3 that $T$~is complete. Since $T$~is R-axiomatizable by construction, it follows from Theorem X.6.5(a) that $T$~is R-decidable as desired.
+\end{proof}
+\noindent\textsc{Exercise 2.6.}
+Let $S=\{\,P_n\mid n\in\N\,\}$ be a set of unary relation symbols. Define $S$-structures $\A$~and~$\B$ where $A=\N$, $B=\N\union\{\infty\}$, and
+$$P_n^{\A}=\{\,m\in\N\mid m\ge n\,\}\qquad P_n^{\B}=\{\,m\in\N\mid m\ge n\,\}\union\{\infty\}$$
+Then $\A\equiv\B$ but not $\A\fiso\B$.
+\begin{proof}
+We claim that for all $\varphi\in L_n^S$ and $a_0,\ldots,a_{n-1}\in A$,
+$$\A\models\varphi[a_0,\ldots,a_{n-1}]\quad\text{iff}\quad\B\models\varphi[a_0,\ldots,a_{n-1}]$$
+(In other words, $\A$~is an \emph{elementary substructure} of~$\B$.) In particular, we obtain $\A\equiv\B$. The atomic cases are immediate from the fact that $\A\subseteq\B$, and the boolean cases are immediate from the induction hypothesis. If the induction hypothesis holds for $\psi(x,x_0,\ldots,x_{n-1})$, then from $$\A\models\exists x\psi[a_0,\ldots,a_{n-1}]$$ we obtain $$\B\models\exists x\psi[a_0,\ldots,a_{n-1}]$$ trivially. Conversely, suppose $\B\models\exists x\psi[a_0,\ldots,a_{n-1}]$, so there exists a $b\in B$ such that $\B\models\psi[b,a_0,\ldots,a_{n-1}]$. If $b\in A$, we are done; if $b=\infty$, we claim there exists an $a\in A$ such that $\B\models\psi[a,a_0,\ldots,a_{n-1}]$ (without proof at the moment).\footnote{Note that an analysis of the definable sets in~$B$ using automorphisms is not helpful here since there are no nontrivial automorphisms of~$\B$; this follows from the fact that each natural~$n$ is definable in~$\B$ by the formula $\varphi_n(x)=P_n x\land\lnot P_{n+1}x$.}
+
+Suppose now towards a contradiction that $(I_n)_{n\in\N}:\A\fiso\B$. Choose some~$n$ and $p\in I_{n+1}$. By the back property of partially isomorphic structures, there exists a $q\in I_n$, $p\subseteq q$, such that $q(m)=\infty$ for some $m\in\dom(q)$. But note that
+$$m\not\in P_{m+1}^{\A}\quad\text{and}\quad q(m)\in P_{m+1}^{\B}$$
+---a contradiction. Thus $\A\not\fiso\B$.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.12.}
+Let $S$~be finite and relational and let $\B$~be an $S$-structure whose domain~$B$ contains exactly~$n$ elements. Then for all $S$-structures~$\A$,
+$$\A\models\varphi_{\B}^{n+1}\quad\text{iff}\quad\A\iso\B$$
+(In other words, $\varphi_{\B}^{n+1}$~characterizes~$\B$ up to isomorphism.)
+\begin{proof}
+Since $S$~is finite and relational and $n+1\ge1$, it follows from Theorem~3.10 that
+$$\A\models\varphi_{\B}^{n+1}\quad\text{iff}\quad\A\iso_{n+1}\B$$
+We claim that $\A\iso_{n+1}\B$ iff $\A\iso\B$. First, if $\A\iso\B$, then $\A\fiso\B$ by Lemma~1.5 (a)~and~(b), and it is immediate that $\A\iso_{n+1}\B$. Conversely, suppose $(I_m)_{m\le n+1}:\A\iso_{n+1}\B$ and choose $p\in I_{n+1}$. Extend~$p$ using the back property $n$~times to a partial isomorphism $q\in I_1$ such that $\ran(q)=B$. We must have $\dom(q)=A$, for otherwise there exists a proper extension~$q'$ of~$q$ in~$I_0$ which is injective, contradicting the fact that~$\ran(q)=B$. Thus $q:\A\iso\B$ and $\A\iso\B$ as claimed. (Compare this proof with the proof of Lemma 1.5(c).)
+\end{proof}
+
+\noindent\textsc{Exercise 3.17.}
+Let $S=\{P_1,\ldots,P_r\}$ consist of unary relation symbols. Then for every $S$-structure~$\A$ and every $m\ge1$, there exists an $S$-structure~$\B$ whose domain contains at most $m\cdot2^r$~elements such that $\A\iso_m\B$.
+\begin{proof}
+Suppose $\A$~is given. Let $\mathcal{C}^{\A}$~denote the collection of all subsets of~$A$ of the form
+$$C_k^{\A}=A_{k,1}\sect\cdots\sect A_{k,r}\qquad A_{k,i}=P_i^{\A}\text{ or }A_{k,i}=\overline{P_i^{\A}}$$
+(For $X\subseteq A$, we denote~$A\backslash X$ by~$\overline{A}$.) Note that $|\mathcal{C}^{\A}|\le2^r$. Also, $\mathcal{C}^{\A}$~forms a `quasi-partition' of~$A$. We have
+$$A=\bigunion_k C_k^{\A}$$
+and we claim that if $C_i^{\A}\ne C_j^{\A}$, then $C_i^{\A}\sect C_j^{\A}=\emptyset$. Indeed, if $C_i^{\A}\ne C_j^{\A}$, then we must have $A_{i,l}\ne A_{j,l}$ for some $1\le l\le r$. But then $A_{i,l}=\overline{A_{j,l}}$, and since $A_{j,l}\sect\overline{A_{j,l}}=\emptyset$, it follows that $C_i^{\A}\sect C_j^{\A}=\emptyset$ as claimed. (Note that $\mathcal{C}^{\A}$~may contain an empty set, so it is not in general a partition of~$A$.)
+
+Now given $m\ge 1$, construct for each set $C_k^{\A}\in\mathcal{C}^{\A}$ a corresponding set~$C_k^{\B}$ as follows: if $|C_k^{\A}|\le m$, set $C_k^{\B}=C_k^{\A}$; otherwise, let $C_k^{\B}$~be an arbitrary $m$-element subset of~$C_k^{\A}$. Define $B=\bigunion_k C_k^{\B}$ and set $P_i^{\B}=P_i^{\A}\sect B$, forming an $S$-structure~$\B$. Note that $|B|\le m\cdot2^r$.
+
+We claim that $\A\iso_m\B$. To prove this, we construct a sequence $I_0,\ldots,I_m$, where for $0\le n\le m$,
+$$I_n=\{\,p\in\pisos(\A,\B)\mid |\dom(p)|\le m-n\,\}$$
+Note that $I_n\subseteq\pisos(\A,\B)$ and $\emptyset\in I_n$ for each~$n$. We verify the forth property (the back property can be proved similarly). Suppose $n+1\le m$, $p\in I_{n+1}$, and $a\in A$ where $a\not\in\dom(p)$. We note that $a\in C_k^{\A}$ for some~$k$. Now since
+$$|\ran(p)|=|\dom(p)|\le m-(n+1)\le m-1$$
+there exists an element $b\in C_k^{\B}$ such that $q=p\union\{(a,b)\}$ is an injection. Furthermore, it can be seen that $q\in\pisos(\A,\B)$, and since $|\dom(q)|=|\dom(p)|+1\le m-n$, we have $q\in I_n$ as desired. Thus $(I_n)_{n\le m}:\A\iso_m\B$.
+\end{proof}
+
+\section*{Chapter~XIII}
+
+\subsection*{Section~1}
+\noindent\textsc{Exercise 1.6.}
+$\Lq\le\Ls$, not $\Lsw\le\Lq$, and not $\Lq\le\Lsw$.
+\begin{proof}
+We omit the details of the verification but note that $\Lq\le\Ls$ since uncountability can be expressed in~$\Ls$ (see p.~140). In~$\Lsw$, we can characterize the finite structures with a sentence (see \textsc{Exercise IX.1.7(c)}), but since compactness holds for~$\Lq$ (Theorem IX.3.2) this is not possible in~$\Lq$. Conversely, we can characterize uncountable structures with a sentence in~$\Lq$, but since L\"owenheim-Skolem holds in~$\Lsw$ (see \textsc{Exercise IX.2.7}), this is not possible in~$\Lsw$.
+\end{proof}
+
+\subsection*{Section~3}
+\noindent\textsc{Exercise 3.7.}
+(Beth's Definability Theorem.) Let $S$~be finite and relational, and let $P$~be a $k$-ary relation symbol not in~$S$. Let $\Phi\subseteq L_0^{S\union\{P\}}$. Then $\Phi$~defines~$P$ explicitly if and only if $\Phi$~defines~$P$ implicitly.
+
+In order to prove this result, we first prove the following lemma:
+
+\noindent\textbf{Lemma.} Let $\A$~and~$\B$ be $S$-structures with $\pi:\A\iso\B$. Then for all $\varphi\in L_n^{S\union\{P\}}$,
+$$(\A,P^{\A})\models\varphi[\overline{a}]\quad\text{iff}\quad(\B,\pi(P^{\A}))\models\varphi[\pi(\overline{a})]$$
+\begin{proof}
+Proceed by induction on~$\varphi$. The atomic $S$-cases hold since $\pi$~preserves satisfiability between $\A$~and~$\B$ for all $S$-formulas. If $\varphi=Px_1\cdots x_n$, then
+\begin{center}
+\begin{tabular}{rcl}
+$(\A,P^{\A})\models\varphi[\overline{a}]$&iff&$\overline{a}\in P^{\A}$\\
+	&iff&$\pi(\overline{a})\in\pi(P^{\A})$\\
+	&iff&$(\B,\pi(P^{\A}))\models\varphi[\pi(\overline{a})]$
+\end{tabular}
+\end{center}
+The boolean and quantifier cases follow easily.
+\end{proof}
+
+\noindent An immediate corollary of the above lemma is that if $\pi:\A\iso\B$, then $(\A,P^{\A})$ and $(\B,\pi(P^{\A}))$ agree on $S\union\{P\}$-sentences. In particular, if $(\A,P^{\A})\models\Phi$, then $(\B,\pi(P^{\A}))\models\Phi$. Thus, in the case that $\Phi$~defines~$P$ implicitly, if $(\A,P^{\A})\models\Phi$ and $(\B,P^{\B})\models\Phi$, then $P^{\B}=\pi(P^{\A})$.
+
+Now we proceed with the original proof.
+\begin{proof}
+First suppose that there exists an explicit definition $\psi\in L_k^S$ of~$P$ in~$\Phi$, that is
+$$\Phi\models\forall x_1\cdots x_k(Px_1\cdots x_k\liff\psi)$$
+If $\A$~is an $S$-structure, $P_1,P_2\subseteq A^k$, and
+$$(\A,P^1)\models\Phi\quad\text{and}\quad(\A,P^2)\models\Phi$$
+then for all $\overline{a}\in A^k$,
+\begin{center}
+\begin{tabular}{rcll}
+$\overline{a}\in P^1$&iff&$(\A,P^1)\models Px_1\cdots x_k[\overline{a}]$&\\
+	&iff&$(\A,P^1)\models\psi[\overline{a}]$&\\
+	&iff&$(\A,P^2)\models\psi[\overline{b}]$&since $\psi\in L_k^S$ (coincidence)\\
+	&iff&$\overline{a}\in P^2$&
+\end{tabular}
+\end{center}
+Thus $P^1=P^2$ as desired.
+
+Conversely, suppose $P$~is defined implicitly in~$\Phi$. For $n\ge0$ set
+$$\chi^n=\biglor\{\,\varphi_{\A,\overline{a}}^n\mid\text{$\A $~an $S$-structure, $(\A,P^{\A})\models\Phi $, and $P^{\A}\overline{a} $}\,\}$$
+We claim that there exists an~$n$ such that
+$$\Phi\models\forall x_1\cdots x_k(Px_1\cdots x_k\liff\chi^n)$$
+so that $P$~is explicitly defined in~$\Phi$, as desired.
+
+First note that, for all $n\ge0$, we have
+$$\Phi\models\forall x_1\cdots x_k(Px_1\cdots x_k\limp\chi^n)$$
+Indeed, if $n\ge0$ and $(\A,P^{\A})\models\Phi$, then for all $\overline{a}\in A^k$, if $(\A,P^{\A})\models Px_1\cdots x_k[\overline{a}]$, then $P^{\A}\overline{a}$. Further, we know $\A\models\varphi_{\A,\overline{a}}^n[\overline{a}]$ (see XII.3.5(b)). Thus $\A\models\chi^n[\overline{a}]$, so by coincidence since $\chi^n\in L_k^S$, $(\A,P^{\A})\models\chi^n[\overline{a}]$.
+
+Now suppose there does not exist an~$n$ satisfying the claim. Then for each $n\ge0$, there exist $S$-structures $\A$~and~$\B$, $\overline{a}\in A^k$ and $\overline{b}\in B^k$, such that $(\A,P^{\A})\models\Phi$ and $(\B,P^{\B})\models\Phi$, $\B\models\varphi^n_{\A,\overline{a}}[\overline{b}]$, but
+$$(\A,P^{\A})\models Px_1\cdots x_k[\overline{a}]\quad\text{and}\quad(\B,P^{\B})\models\lnot Px_1\cdots x_k[\overline{b}]$$
+In other words, for each $n\ge0$, there exist $\A,\B$ and $\overline{a},\overline{b}$ such that $(\A,P^{\A})\models\Phi$, $(\B,P^{\B})\models\Phi$, $(\A,\overline{a})\iso_n(\B,\overline{b})$ but $P^{\A}\overline{a}$ and not $P^{\B}\overline{b}$.
+
+Now the latter result can be formalized in terms of the satisfiability of a certain set of sentences, as in the proof of Lindstr\"om's Theorem (we omit the many details). We obtain from this development two $S$-structures $\A$~and~$\B$ and tuples $\overline{a},\overline{b}$ such that $(\A,P^{\A})\models\Phi$ and $(\B,P^{\B})\models\Phi$, $\pi:(\A,\overline{a})\iso(\B,\overline{b})$ but $P^{\A}\overline{a}$ and not $P^{\B}\overline{b}$. This contradicts the results of our lemma above, since $P^{\B}=\pi(P^{\A})$ and $\overline{b}=\pi(\overline{a})$. Thus our supposition is false and there exists an~$n$ satisfying the claim above.
+\end{proof}
+
+\begin{thebibliography}{0}
+\bibitem{ebbing94} Ebbinghaus, H.--D. and J.~Flum and W.~Thomas. \emph{Mathematical Logic}, 2nd ed. New York: Springer, 1994.
+\end{thebibliography}
+\end{document}
